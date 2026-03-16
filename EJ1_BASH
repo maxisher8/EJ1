@@ -5,7 +5,7 @@ echo -e "\033[30;47m Ingrese una opcion (número) del menú: \033[0m
 \n \033[30;46m4)\033[0m Logs 
 \n \033[30;44m5)\033[0m Configuración 
 \n \033[30;45m6)\033[0m Salir \n "
-export FILENAME=informacion
+export FILENAME=FILENAME.txt
 read RESPUESTA_OP
 case $RESPUESTA_OP in 
     "1") 
@@ -13,13 +13,10 @@ case $RESPUESTA_OP in
             mkdir EPNro1 ; 
             cd EPNro1 ; 
             mkdir entrada salida procesado ; 
-            cd salida ; 
-            touch FILENAME.txt ; 
-            cd ../.. ;
+            cd .. ;
             mv consolidar.sh EPNro1 ; 
         } && echo -e "\033[32mHecho correctamente\033[0m" ;;
     "2") 
         cd EPNro1
         bash consolidar.sh ;;
-      
 esac
