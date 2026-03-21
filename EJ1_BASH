@@ -7,13 +7,13 @@ RESPUESTA_OP=0
 
 until [ "$RESPUESTA_OP" -eq "6" ] 
 do
-    echo -e "\033[30;47m Ingrese una opcion (número) del menú: \033[0m 
-    \n \033[30;41m1)\033[0m Crear entorno 
-    \n \033[30;43m2)\033[0m Correr Proceso 
-    \n \033[30;42m3)\033[0m Lista ordenada por número de padrón
-    \n \033[30;46m4)\033[0m Mostrar 10 mejores notas
-    \n \033[30;44m5)\033[0m Mostrar datos según padrón
-    \n \033[30;45m6)\033[0m Salir \n "
+    echo -e "Ingrese una opcion (número) del menú:  
+    \n 1) Crear entorno 
+    \n 2) Correr Proceso 
+    \n 3) Lista ordenada por número de padrón
+    \n 4) Mostrar 10 mejores notas
+    \n 5) Mostrar datos según padrón
+    \n 6) Salir \n "
     read -p "Tu elección: " RESPUESTA_OP 
     case $RESPUESTA_OP in 
         "1") 
