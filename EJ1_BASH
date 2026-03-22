@@ -13,7 +13,7 @@ case "$PARAMETRO_OPTATIVO" in
         *)
             echo "Ningún parametro optativo";; 
 esac
-if [[ "$PARAMETRO_OPTATIVO" == "-d" || -z "$PARAMETRO_OPTATIVO" ]] ; then
+if [[ -z "$PARAMETRO_OPTATIVO" ]] ; then
 
     until [ "$RESPUESTA_OP" -eq "6" ] 
     do
