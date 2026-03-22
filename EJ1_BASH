@@ -3,65 +3,69 @@
 
 export FILENAME=FILENAME.txt
 RESPUESTA_OP=0  
+PARAMETRO_OPTATIVO="$1"
 
-
-until [ "$RESPUESTA_OP" -eq "6" ] 
-do
-    echo -e "Ingrese una opcion (número) del menú:  
-    \n 1) Crear entorno 
-    \n 2) Correr Proceso 
-    \n 3) Lista ordenada por número de padrón
-    \n 4) Mostrar 10 mejores notas
-    \n 5) Mostrar datos según padrón
-    \n 6) Salir \n "
-    read -p "Tu elección: " RESPUESTA_OP 
-    case $RESPUESTA_OP in 
-        "1") 
-            {
-                cd ~
-                mkdir EPNro1 ; 
-                cd EPNro1 ; 
-                mkdir entrada salida procesado ; 
-                cd ../EJ1 ;
-                mv consolidar.sh ~/EPNro1 ; 
-            } && echo -e "\033[32mHecho correctamente\033[0m" ;;
-
-        "2") 
-            cd ~/EPNro1
-            bash consolidar.sh & ;;
-
-        "3")
-            if [[ -f ~/EPNro1/salida/FILENAME.txt ]];
-            then 
-                cd ~/EPNro1/salida
-                sort -n -r FILENAME.txt #de mayor a menor
-            else
-                echo "No existe el archivo FILENAME";
-            fi ;;
-        "4")
-            if [[ -f ~/EPNro1/salida/FILENAME.txt ]];
-            then 
-                cd ~/EPNro1/salida
-                sort -k5 -n -r FILENAME.txt | head  #de mayor a menor
-            else
-                echo "No existe el archivo FILENAME";
-            fi ;;
-        "5")
-            echo -n "Poner padrón: "
-            read PADRON
-            grep "$PADRON" ~/EPNro1/salida/FILENAME.txt ;;
-        "6")
-            echo "Nos vemos!";;  
-        "$1")
-            echo "Borrando al carpeta EPNro1..."
+case "$PARAMETRO_OPTATIVO" in
+     "-d")
+            echo "Borrando la carpeta EPNro1..."
+            mv ~/EPNro1/consolidar.sh ~/EJ1
             rm -rf ~/EPNro1 ;;
+        *)
+            echo "Ningún parametro optativo";; 
+esac
+if [[ "$PARAMETRO_OPTATIVO" == "-d" || -z "$PARAMETRO_OPTATIVO" ]] ; then
 
-        "0")
-            echo "Bienvenido";;
-     
-        "borrar") 
-            cd ~/EPNro1
-            mv consolidar.sh ~/EJ1 
-            rm -r ~/EPNro1 ;;
-    esac
-done
+    until [ "$RESPUESTA_OP" -eq "6" ] 
+    do
+        echo -e "Ingrese una opcion (número) del menú:  
+        \n 1) Crear entorno 
+        \n 2) Correr Proceso 
+        \n 3) Lista ordenada por número de padrón
+        \n 4) Mostrar 10 mejores notas
+        \n 5) Mostrar datos según padrón
+        \n 6) Salir \n "
+        read -p "Tu elección: " RESPUESTA_OP 
+        case $RESPUESTA_OP in 
+            "1") 
+                {
+                    cd ~
+                    mkdir EPNro1 ; 
+                    cd EPNro1 ; 
+                    mkdir entrada salida procesado ; 
+                    cd ../EJ1 ;
+                    mv consolidar.sh ~/EPNro1 ; 
+                } && echo -e "\033[32mHecho correctamente\033[0m" ;;
+
+            "2") 
+                cd ~/EPNro1
+                bash consolidar.sh & ;;
+
+            "3")
+                if [[ -f ~/EPNro1/salida/FILENAME.txt ]];
+                then 
+                    cd ~/EPNro1/salida
+                    sort -n -r FILENAME.txt #de mayor a menor
+                else
+                    echo "No existe el archivo FILENAME";
+                fi ;;
+            "4")
+                if [[ -f ~/EPNro1/salida/FILENAME.txt ]];
+                then 
+                    cd ~/EPNro1/salida
+                    sort -k5 -n -r FILENAME.txt | head  #de mayor a menor
+                else
+                    echo "No existe el archivo FILENAME";
+                fi ;;
+            "5")
+                echo -n "Poner padrón: "
+                read PADRON
+                grep "$PADRON" ~/EPNro1/salida/FILENAME.txt ;;
+
+            "6")
+                echo "Nos vemos!";;  
+            *)
+                echo "Ninguna opcion es compatible a su respuesta, repita el ingreso";;
+            
+        esac
+    done
+fi
