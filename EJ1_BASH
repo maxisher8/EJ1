@@ -24,7 +24,7 @@ PARAMETRO_OPTATIVO="$1"
                     mkdir entrada salida procesado ; 
                     cd ../EJ1 ;
                     mv consolidar.sh ~/EPNro1 ; 
-                } && echo -e "\033[32mHecho correctamente\033[0m" ;;
+                } && echo -e "Hecho correctamente";;
 
             "2") 
                 cd ~/EPNro1
